@@ -23,3 +23,10 @@ class Bids(models.model):
     bid = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     listing = models.ForeignKey(Listings, on_delete=models.CASCADE)
+    
+class Comments(models.model):
+    """Table that will contain the comments of users on a listing"""
+    
+    comment = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listings, on_delete=models.CASCADE)
