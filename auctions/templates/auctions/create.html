@@ -1,24 +1,25 @@
 {% extends "auctions/layout.html"%}
 
 {% block body %}
-     <form method="POST">
+     <form method="POST" action="{% url "create" %}" enctype="multipart/form-data">
+          {% csrf_token %}
           <div class="container w-25">
                <p class="text-center h1 fw-bold mb-4 mt-4">Adding an item?</p>
                <div class="form-outline mb-3">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control {{is_title}}" name="T" value="{{T}}" />
                     <label class="form-label" for="typeText">Title</label>
                </div>
                <div class="form-outline mb-3">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control {{is_bid}}" name="B" value="{{B}}" />
                     <label class="form-label" for="typeText">Starting bid</label>
                </div>
                <div class="form-outline mb-3">
-                    <textarea type="text" class="form-control" rows="4"/></textarea>
+                    <textarea type="text" class="form-control" rows="4" name="D"/>{{D}}</textarea>
                     <label class="form-label" for="typeText">Description</label>
                </div>
                <div class="mb-3">
                     <label class="form-label mb-0" for="customFile">Upload an image of your item</label>
-                    <input type="file" class="form-control"/>
+                    <input type="file" class="form-control {{is_image}}" name="I" value="{{I}}"/>
                     <div class="text-helper"><small>JPEG,JPG or PNG<small></div>               
                </div>
                <div class="text-center">

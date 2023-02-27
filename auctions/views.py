@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User
-
+from .models import Listing
 
 def index(request):
     return render(request, "auctions/index.html")
@@ -62,5 +62,30 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+
 def create(request):
-    return render(request, "auctions/create.html")
+    if request.method == "POST":
+        
+        Title = request.POST.get("T","")
+        
+        Bid = request.POST.get("B","")
+            
+        Description = request.POST.get("D","")
+        Image = request.FILES.get("I","")
+        
+        if not Title:
+            return render(request, "auctions/create.html",{"is_title" : "is-invalid","D":Description,"B":Bid})
+        if not Bid:
+            return render(request, "auctions/create.html",{"is_bid" : "is-invalid","T":Title,"D":Description})
+        if not Image :
+            return render(request, "auctions/create.html",{"is_image" : "is-invalid","T" :Title,"D":Description,"B":Bid})
+            
+        new_listing = Listing(name=Title, 
+                    description=Description, 
+                    startingBid=Bid, 
+                    image=Image)
+        new_listing.save()
+        return render(request,"auctions/index.html")
+            
+    else:
+        return render(request, "auctions/create.html")
