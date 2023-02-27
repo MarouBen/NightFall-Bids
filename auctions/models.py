@@ -6,7 +6,7 @@ class User(AbstractUser):
     """"Users table is created by default by the class AbstractUser"""
     pass
 
-class Listings(models.Model):
+class Listing(models.Model):
     """"The table that will hold the listing name, details text, starting bid,
     date when it was posted and finally an image"""
     
@@ -17,16 +17,16 @@ class Listings(models.Model):
     startingBid = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to="Images/Listings/")
     
-class Bids(models.Model):
+class Bid(models.Model):
     """"Bids table will contain all the bids that are placed on a certain listing by a certain user"""
     
     bid = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    listing = models.ForeignKey(Listings, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
     
-class Comments(models.Model):
+class Comment(models.Model):
     """Table that will contain the comments of users on a listing"""
     
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    listing = models.ForeignKey(Listings, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
