@@ -3,6 +3,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from .models import User
 from .models import Listing
@@ -62,16 +63,15 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
-
+@login_required
 def create(request):
     if request.method == "POST":
         
-        Title = request.POST.get("T","")
-        
-        Bid = request.POST.get("B","")
-            
-        Description = request.POST.get("D","")
-        Image = request.FILES.get("I","")
+        Title = request.POST.get("T","").strip()
+        Bid = request.POST.get("B","").strip()
+        Description = request.POST.get("D","").strip()
+        Image = request.FILES.get("I","").strip()
+        Owner = request.user
         
         if not Title:
             return render(request, "auctions/create.html",{"is_title" : "is-invalid","D":Description,"B":Bid})
@@ -83,9 +83,13 @@ def create(request):
         new_listing = Listing(name=Title, 
                     description=Description, 
                     startingBid=Bid, 
-                    image=Image)
+                    image=Image,
+                    user=Owner)
         new_listing.save()
         return render(request,"auctions/index.html")
-            
-    else:
-        return render(request, "auctions/create.html")
+    
+    # If the user is not loged in
+    if not request.user.is_authentificated:
+        return HttpResponseRedirect(reverse("login"))
+    
+    return render(request, "auctions/create.html")

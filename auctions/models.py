@@ -16,6 +16,7 @@ class Listing(models.Model):
     date = models.DateField(auto_now_add=True)
     startingBid = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to="Images/Listings/")
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     
 class Bid(models.Model):
     """"Bids table will contain all the bids that are placed on a certain listing by a certain user"""
