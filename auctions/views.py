@@ -70,7 +70,7 @@ def create(request):
         Title = request.POST.get("T","").strip()
         Bid = request.POST.get("B","").strip()
         Description = request.POST.get("D","").strip()
-        Image = request.FILES.get("I","").strip()
+        Image = request.FILES.get("I","")
         Owner = request.user
         
         if not Title:
@@ -89,7 +89,7 @@ def create(request):
         return render(request,"auctions/index.html")
     
     # If the user is not loged in
-    if not request.user.is_authentificated:
+    if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse("login"))
     
     return render(request, "auctions/create.html")
