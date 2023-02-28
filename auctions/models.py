@@ -1,5 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import MinValueValidator
+from django.core.exceptions import ValidationError
 
 
 class User(AbstractUser):
@@ -7,23 +9,27 @@ class User(AbstractUser):
     pass
 
 class Listing(models.Model):
-    """"The table that will hold the listing name, details text, starting bid,
+    """"The table that will hold the listing name, details text, starting bid(is also hoghest bid),
     date when it was posted and finally an image"""
     
     # The id is created automatically
     name = models.CharField(max_length=64)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
-    startingBid = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to="Images/Listings/")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    startingBid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
+    
     
 class Bid(models.Model):
     """"Bids table will contain all the bids that are placed on a certain listing by a certain user"""
     
-    bid = models.DecimalField(max_digits=10, decimal_places=2)
+    bid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    def bidMinValue(self):
+        if self.bid < self.listing.startingBid:
+            raise ValidationError("Bid must be higher than the highest bid!")
     
 class Comment(models.Model):
     """Table that will contain the comments of users on a listing"""
