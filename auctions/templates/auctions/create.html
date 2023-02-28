@@ -10,8 +10,8 @@
                     <label class="form-label" for="typeText">Title</label>
                </div>
                <div class="form-outline mb-3">
-                    <input type="number" class="form-control" name="B" value="{{B}}" required/>
-                    <label class="form-label" for="typeText">Starting bid</label>
+                    <input type="number" class="form-control" name="B" value="{{B}}" max="99999999" required/>
+                    <label class="form-label" for="typeText">Starting bid in $</label>
                </div>
                <div class="form-outline mb-3">
                     <textarea type="text" class="form-control" rows="4" name="D"/>{{D}}</textarea>
@@ -19,7 +19,7 @@
                </div>
                <div class="mb-3">
                     <label class="form-label mb-0" for="customFile">Upload an image of your item</label>
-                    <input type="file" class="form-control" name="I" value="{{I}}" required/>
+                    <input type="file" class="form-control" name="I" value="{{I}}" accept="image/*,jpg,jpeg,png" required/>
                     <div class="text-helper"><small>JPEG,JPG or PNG<small></div>               
                </div>
                <div class="text-center">
