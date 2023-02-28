@@ -72,13 +72,6 @@ def create(request):
         Description = request.POST.get("D","").strip()
         Image = request.FILES.get("I","")
         Owner = request.user
-        
-        if not Title:
-            return render(request, "auctions/create.html",{"is_title" : "is-invalid","D":Description,"B":Bid})
-        if not Bid:
-            return render(request, "auctions/create.html",{"is_bid" : "is-invalid","T":Title,"D":Description})
-        if not Image :
-            return render(request, "auctions/create.html",{"is_image" : "is-invalid","T" :Title,"D":Description,"B":Bid})
             
         new_listing = Listing(name=Title, 
                     description=Description, 
