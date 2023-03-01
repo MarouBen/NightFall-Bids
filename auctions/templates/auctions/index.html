@@ -5,7 +5,7 @@
         <section class="mb-10 text-center">
             <h2 class="fw-bold mb-7 text-center">Active Listings</h2>
             <div class="row gx-lg-5">
-                {% for listing in listings %}
+                {% for listing in listings|slice:":6" %}
                     <!-- cartd template -->
                     <div class="col-lg-4 mb-6 mb-lg-5">
                         <div class="card rounded-6 h-100">
@@ -17,9 +17,7 @@
                                 <h5 class="card-title fw-bold">{{ listing.name|truncatechars:50 }}</h5>
                                 <p class="card-text">{{ listing.description|truncatechars:120 }}</p>
                                 <p class="card-text"><b>Curent highest bid:</b> {{ listing.startingBid }}$</p>
-                                
                                 <a href="#!" class="btn btn-secondary">View</a>
-                                
                             </div>
                         </div>
                     </div>
