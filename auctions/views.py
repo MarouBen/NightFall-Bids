@@ -5,8 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import User
-from .models import Listing
+from .models import User,Listing,ListingImage
+
 
 def index(request):
     return render(request, "auctions/index.html",{
@@ -72,15 +72,21 @@ def create(request):
         Title = request.POST.get("T","").strip()
         Bid = request.POST.get("B","").strip()
         Description = request.POST.get("D","").strip()
-        Image = request.FILES.get("I","")
+        Images = request.FILES.getlist("I")
         Owner = request.user
-            
+        
+        # Saving the listing into it's table   
         new_listing = Listing(name=Title, 
                     description=Description, 
                     startingBid=Bid, 
-                    image=Image,
                     user=Owner)
         new_listing.save()
+        
+        # Save the images into the images table related the the listing
+        for Image in Images:
+            new_listing_image = ListingImage(listing=new_listing ,images=Image)
+            new_listing_image.save()
+        
         return render(request,"auctions/index.html")
     
     # If the user is not loged in
