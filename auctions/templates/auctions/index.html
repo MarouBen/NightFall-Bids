@@ -5,25 +5,26 @@
         <section class="mb-10 text-center">
             <h2 class="fw-bold mb-7 text-center">Active Listings</h2>
             <div class="row gx-lg-5">
-                <!-- cartd template -->
-                <div class="col-lg-4 mb-6 mb-lg-3">
-                    <div class="card rounded-6 h-100">
-                        <div class="mt-n3 bg-image hover-overlay ripple mx-3 shadow-4-strong rounded-6" data-mdb-ripple-color="light">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid" />
-                        <a href="#!">
-                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                        </a>
-                        </div>
-                        <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                        <p class="card-text">Curent highest bid: 100$</p>
-                        <a href="#!" class="btn btn-secondary">See more</a>
+                {% for listing in listings %}
+                    <!-- cartd template -->
+                    <div class="col-lg-4 mb-6 mb-lg-3">
+                        <div class="card rounded-6 h-100">
+                            <div class="mt-n3 bg-image hover-overlay ripple mx-3 shadow-4-strong rounded-6" data-mdb-ripple-color="light">
+                            <img src="{{ listing.images.first.image.url }}" class="img-fluid" alt="{{ listing.name }}" image/>
+                            <a href="#!">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </a>
+                            </div>
+                            <div class="card-body">
+                            <h5 class="card-title">{{ listing.name }}</h5>
+                            <p class="card-text">{{ listing.description }}</p>
+                            <p class="card-text">Curent highest bid: {{ listing.startingBid }}</p>
+                            <a href="#!" class="btn btn-secondary">See more</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- card template -->
+                    <!-- card template -->
+                    {% endfor %}
             </div>
         </section>
     </div>

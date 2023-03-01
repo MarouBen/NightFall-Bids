@@ -9,9 +9,12 @@ from .models import User,Listing,ListingImage
 
 
 def index(request):
-    return render(request, "auctions/index.html",{
-        
-    })
+    # Here we get all the listing and the first image of each
+    listings = Listing.objects.all()      
+    context = {
+        "listings" : listings,
+    }
+    return render(request, "auctions/index.html",context)
 
 
 def login_view(request):
