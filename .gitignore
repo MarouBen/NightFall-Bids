@@ -1,5 +1,5 @@
 # Ignore all the images added during devlopment
-Images/Listings/*
+auctions/Images/Listings/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
