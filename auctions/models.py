@@ -4,6 +4,12 @@ from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
 
 
+def validate_image_extension(value):
+    ext = value.name.split('.')[-1]
+    valid_extensions = ['jpg', 'jpeg', 'png']
+    if ext not in valid_extensions:
+        raise ValidationError(_('Invalid image file type.'))
+
 class User(AbstractUser):
     """"Users table is created by default by the class AbstractUser"""
     pass
@@ -24,7 +30,7 @@ class ListingImage(models.Model):
     """The table table that will hold the images of a listing"""
     
     listing = models.ForeignKey(Listing,on_delete=models.CASCADE,related_name="images")
-    images = models.ImageField(upload_to="Images/Listings/")
+    images = models.ImageField(upload_to="Images/Listings/", validators=[validate_image_extension])
     
     
 class Bid(models.Model):
