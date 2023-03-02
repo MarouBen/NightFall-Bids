@@ -17,6 +17,13 @@ def index(request):
     return render(request, "auctions/index.html",context)
 
 
+def listings(request):
+    listings = Listing.objects.all()      
+    context = {
+        "listings" : listings,
+    }
+    return render(request, "auctions/listings.html",context)
+
 def login_view(request):
     if request.method == "POST":
 

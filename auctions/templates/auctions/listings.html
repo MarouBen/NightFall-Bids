@@ -3,9 +3,9 @@
 {% block body %}
     <div class="container">
         <section class="mb-10 text-center">
-            <h2 class="fw-bold mb-7 text-center">Featured</h2>
+            <h2 class="fw-bold mb-7 text-center">Active Listings</h2>
             <div class="row gx-lg-5">
-                {% for listing in listings|slice:":6" %}
+                {% for listing in listings%}
                     <!-- cartd template -->
                     <div class="col-lg-4 mb-6 mb-lg-5">
                         <div class="card rounded-6 h-100">
@@ -23,11 +23,6 @@
                     </div>
                     <!-- card template -->
                     {% endfor %}
-                    <div class="text-center">
-                        <a href="{% url 'create' %}" class="btn btn-outline-dark btn-rounded btn-lg fw-bold w-25 "> List a item </a>
-                    
-                        <a href="{% url 'listings' %}" class="btn btn-dark btn-rounded btn-lg fw-bold w-25 "> See more </a>
-                    <div>
             </div>
         </section>
     </div>
