@@ -101,6 +101,6 @@ def create(request):
     
     # If the user is not loged in
     if not request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("login"))
+        return redirect("login")
     
     return render(request, "auctions/create.html")
