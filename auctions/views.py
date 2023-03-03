@@ -82,14 +82,16 @@ def create(request):
         Title = request.POST.get("T","").strip()
         Bid = request.POST.get("B","").strip()
         Description = request.POST.get("D","").strip()
+        Category = request.POST.get("C")
         Images = request.FILES.getlist("I")
         Owner = request.user
-        
+        print(Category)
         # Saving the listing into it's table   
         new_listing = Listing(name=Title, 
                     description=Description, 
                     startingBid=Bid, 
-                    user=Owner)
+                    user=Owner,
+                    category=Category)
         new_listing.save()
         
         # Save the images into the images table related the the listing

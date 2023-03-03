@@ -26,14 +26,11 @@
                     <button type="button" class="btn btn-Light shadow-3">
                          Category:
                     </button>
-                    <button type="button" class="btn btn-light dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
-                      Choose a Category
-                    </button>
-                    <ul class="dropdown-menu">
+                    <select class="form-select" name="C">
                          {% for category, label in categories %}
-                              <li class="dropdown-item">{{ label }}</li>
+                             <option value="{{ category }}" class="form-control " >{{ label }}</option>
                          {% endfor %}
-                    </ul>
+                     </select>
                </div>
                <div class="text-center mt-3">
                     <button type="submit" class="btn btn-dark">List item</button>
