@@ -102,5 +102,7 @@ def create(request):
     # If the user is not loged in
     if not request.user.is_authenticated:
         return redirect("login")
-    
-    return render(request, "auctions/create.html")
+   
+    return render(request, "auctions/create.html",{
+        "categories" : Listing.CATEGORY_CHOICES
+    })

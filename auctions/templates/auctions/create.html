@@ -17,13 +17,23 @@
                     <textarea type="text" class="form-control" rows="4" name="D"/>{{D}}</textarea>
                     <label class="form-label" for="typeText">Description</label>
                </div>
-               <div class="mb-3">
+               <div class="mb-2">
                     <label class="form-label mb-0" for="customFile">Upload one or many images of your item</label>
                     <input type="file" class="form-control" name="I" value="{{I}}" accept="image/*,jpg,jpeg,png" multiple required/>
                     <div class="text-helper"><small>JPEG,JPG or PNG<small></div>               
                </div>
-               <div class="text-center">
-                    <button type="submit" class="btn btn-primary w-25">List</button>
+               <div class="btn-group shadow-1">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
+                      Choose a Category
+                    </button>
+                    <ul class="dropdown-menu">
+                         {% for category, label in categories %}
+                              <li class="dropdown-item">{{ label }}</li>
+                         {% endfor %}
+                    </ul>
+               </div>
+               <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-dark w-25">List</button>
                </div>
           </div>
      </form>

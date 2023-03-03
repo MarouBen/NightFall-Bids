@@ -10,16 +10,6 @@ def validate_image_extension(value):
     if ext not in valid_extensions:
         raise ValidationError(_('Invalid image file type.'))
 
-# current available categories of listings
-CATEGORY_CHOICES = (
-        ('Electronics', 'Electronics'),
-        ('Clothing', 'Clothing'),
-        ('Books', 'Books'),
-        ('Home & Garden', 'Home & Garden'),
-        ('Sports & Outdoors', 'Sports & Outdoors'),
-    )
-
-
 class User(AbstractUser):
     """"Users table is created by default by the class AbstractUser"""
     pass
@@ -34,6 +24,15 @@ class Listing(models.Model):
     date = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     startingBid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
+    
+    # current available categories of listings
+    CATEGORY_CHOICES = (
+        ('Electronics', 'Electronics'),
+        ('Clothing', 'Clothing'),
+        ('Books', 'Books'),
+        ('Home & Garden', 'Home & Garden'),
+        ('Sports & Outdoors', 'Sports & Outdoors'),
+    )
     category = models.CharField(max_length=20,choices=CATEGORY_CHOICES)
     
     
