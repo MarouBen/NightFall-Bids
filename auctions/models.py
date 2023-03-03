@@ -3,12 +3,22 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
 
-
+# Validator for my image table
 def validate_image_extension(value):
     ext = value.name.split('.')[-1]
     valid_extensions = ['jpg', 'jpeg', 'png']
     if ext not in valid_extensions:
         raise ValidationError(_('Invalid image file type.'))
+
+# current available categories of listings
+CATEGORY_CHOICES = (
+        ('Electronics', 'Electronics'),
+        ('Clothing', 'Clothing'),
+        ('Books', 'Books'),
+        ('Home & Garden', 'Home & Garden'),
+        ('Sports & Outdoors', 'Sports & Outdoors'),
+    )
+
 
 class User(AbstractUser):
     """"Users table is created by default by the class AbstractUser"""
@@ -24,6 +34,7 @@ class Listing(models.Model):
     date = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     startingBid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
+    category = models.CharField(max_length=20,choices=CATEGORY_CHOICES)
     
     
 class ListingImage(models.Model):
