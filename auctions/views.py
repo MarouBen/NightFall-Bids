@@ -10,7 +10,7 @@ from .models import User,Listing,ListingImage
 
 def index(request):
     # Here we get all the listing and the first image of each
-    listings = Listing.objects.all()     
+    listings = Listing.objects.all() 
     context = {
         "listings" : listings,
     }
@@ -111,7 +111,11 @@ def create(request):
     
     
 def listing_view(request, pk):
-    # Get the item
+    # Get the item and it's images
     Item = Listing.objects.get(pk=pk)
     Images = [img.images.url for img in Item.theImages.all()]
-    return render(request, "auctions/item.html")
+    context = {
+        "listing":Item,
+        "images":Images
+    }
+    return render(request, "auctions/item.html",context)

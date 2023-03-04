@@ -1,5 +1,59 @@
 {% extends "auctions/layout.html"%}
 
 {% block body %}
-    
+    <main class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div id="caroussel" class="col-md-6 mb-4">
+                    <div id="carouselExampleCrossfade" class="carousel slide carousel-fade carousel" data-mdb-ride="carousel">
+                        <div class="carousel-inner" >
+                            <div class="carousel-item active">
+                                {% for image in images|slice:":1" %}
+                                    <img src="{{ image }}" class="d-block w-100 " alt="Wild Landscape" style="height:550px;object-fit:cover;"/>
+                                {% endfor %}
+                            </div>
+                            {% for image in images|slice:"1:" %}
+                                <div class="carousel-item">
+                                    <img src="{{ image }}" class="d-block w-100" alt="Camera" style="height:550px;object-fit:cover;"/>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev " type="button" data-mdb-target="#carouselExampleCrossfade" data-mdb-slide="prev">
+                          <span class="carousel-control-prev-icon bg-dark rounded-circle" style="height:45px; width:40px;" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next " type="button" data-mdb-target="#carouselExampleCrossfade" data-mdb-slide="next">
+                          <span class="carousel-control-next-icon bg-dark rounded-circle" style="height:45px;width:40px;" aria-hidden="true"></span>
+                        </button>
+                      </div>                
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="p-4">
+                            <div class="mb-3">
+                                <strong><span style="font-size: 35px;">{{listing.name}}<br></span></strong>
+                                <a href=""><span class="badge bg-dark me-1">{{listing.category}}</span></a>
+                                <a href=""><span class="badge bg-info me-1">Open</span></a>
+                                <a href=""><span class="badge bg-danger me-1">Closed</span></a>
+                            </div>
+                            <p class="lead"><span> Current highest bid: <span class="fw-bold ">$100</span></span></p>
+                            <strong><p style="font-size: 20px;">Description</p></strong>
+                            <p>{{listing.description}}</p>
+                            <form class="d-flex justify-content-left">
+                                <div class="form-outline me-1" style="width: 100px;">
+                                    <input type="number" class="form-control" name="B" max="99999999" required/>
+                                </div>
+                                <button class="btn btn-dark ms-1" type="submit">Bid on the item</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <!--comment row-->
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-6 text-center">
+                        <h4 class="my-4 h4">Comments</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 {% endblock %}
