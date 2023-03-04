@@ -20,13 +20,13 @@
                <div class="mb-2">
                     <label class="form-label mb-0" for="customFile">Upload one or many images of your item</label>
                     <input type="file" class="form-control" name="I" value="{{I}}" accept="image/*,jpg,jpeg,png" multiple required/>
-                    <div class="text-helper"><small>JPEG,JPG or PNG<small></div>               
+                    <div class="text-helper"><small>JPEG,JPG or PNG</small></div>               
                </div>
                <div class="btn-group shadow-1">
                     <button type="button" class="btn btn-Light shadow-3">
                          Category:
                     </button>
-                    <select class="form-select" name="C">
+                    <select name="C" class="form-select">
                          {% for category, label in categories %}
                              <option value="{{ category }}" class="form-control " >{{ label }}</option>
                          {% endfor %}
