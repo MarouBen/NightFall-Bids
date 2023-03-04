@@ -108,3 +108,10 @@ def create(request):
     return render(request, "auctions/create.html",{
         "categories" : Listing.CATEGORY_CHOICES
     })
+    
+    
+def listing_view(request, pk):
+    # Get the item
+    Item = Listing.objects.get(pk=pk)
+    Images = [img.images.url for img in Item.theImages.all()]
+    return render(request, "auctions/item.html")

@@ -43,7 +43,7 @@ class Listing(models.Model):
 class ListingImage(models.Model):
     """The table table that will hold the images of a listing"""
     
-    listing = models.ForeignKey(Listing,on_delete=models.CASCADE,related_name="images")
+    listing = models.ForeignKey(Listing,on_delete=models.CASCADE,related_name="theImages")
     images = models.ImageField(upload_to="auctions/Images/Listings/", validators=[validate_image_extension])
     
     

@@ -10,14 +10,14 @@
                     <div class="col-lg-4 mb-6 mb-lg-5">
                         <div class="card rounded-6 h-100">
                             <div class="mt-n3 bg-image hover-overlay ripple mx-3 shadow-4-strong rounded-6" data-mdb-ripple-color="light">
-                                <img src="{{ listing.images.first.images.url }}" class="img-fluid listing-image" image/>
-                                <a href="#!"><div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div></a>
+                                <img src="{{ listing.theImages.first.images.url }}" class="img-fluid listing-image" image/>
+                                <a href="{% url 'view' listing.pk %}"><div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div></a>
                             </div>
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <h5 class="card-title fw-bold">{{ listing.name|truncatechars:50 }}</h5>
                                 <p class="card-text">{{ listing.description|truncatechars:120 }}</p>         
                                 <p class="card-text"><b>Curent highest bid:</b> {{ listing.startingBid }}$</p>
-                                <a href="#!" class="btn btn-secondary">View</a>
+                                <a href="{% url 'view' listing.pk %}" class="btn btn-secondary">View</a>
                             </div>
                         </div>
                     </div>
