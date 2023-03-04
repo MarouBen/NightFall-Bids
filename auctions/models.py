@@ -8,7 +8,7 @@ def validate_image_extension(value):
     ext = value.name.split('.')[-1]
     valid_extensions = ['jpg', 'jpeg', 'png']
     if ext not in valid_extensions:
-        raise ValidationError(_('Invalid image file type.'))
+        raise ValidationError(('Invalid image file type.'))
 
 class User(AbstractUser):
     """"Users table is created by default by the class AbstractUser"""
