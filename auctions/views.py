@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 from .models import User,Listing,ListingImage
 
@@ -119,3 +120,12 @@ def listing_view(request, pk):
         "images":Images
     }
     return render(request, "auctions/item.html",context)
+
+
+def watchlist(request):
+    if request.method == 'POST':
+        watch = []
+        listing_pk = request.POST.get('watch')
+        watch.append(listing_pk)
+        print(watch)
+        return redirect("index")

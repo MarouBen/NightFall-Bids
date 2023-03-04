@@ -41,16 +41,20 @@
                             <p class="lead"><span> Current highest bid: <span class="fw-bold ">$100</span></span></p>
                             <strong><p style="font-size: 20px;">Description</p></strong>
                             <p>{{listing.description}}</p>
-                            <form class="d-flex justify-content-left">
-                                <div class="form-outline me-1" style="width: 100px;">
-                                    <input type="number" class="form-control" name="B" max="99999999" required/>
-                                </div>
-                                <button class="btn btn-dark ms-1" type="submit">Bid on the item</button>
-                                <input id="heart" type="checkbox" hidden/>
-                                <label class="i1" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                <label class="i2" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                
-                            </form>
+                            <div class=" d-flex">
+                                <form class="d-flex justify-content-left">
+                                    <div class="form-outline me-1" style="width: 100px;">
+                                        <input type="number" class="form-control" name="B" max="99999999" required/>
+                                    </div>
+                                    <button class="btn btn-dark ms-1" type="submit">Bid on the item</button>
+                                </form>
+                                <form action="{% url 'watchlist' %}" method="post">
+                                    {% csrf_token %}
+                                    <input id="heart" name="watch" value="{{ listing.pk }}" type="checkbox" onchange="this.form.submit()" hidden/>
+                                    <label class="i1" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
+                                    <label class="i2" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
+                                </form>
+                            </div>
                             <div class="text-helper"><small>Your bid should be higher than the current one! or add it to your watchlist.</small></div>
                         </div>
                     </div>
