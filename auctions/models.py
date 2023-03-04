@@ -25,6 +25,10 @@ class Listing(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     startingBid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
     
+    # To make he listimng always sorted
+    class Meta:
+        ordering = ["-date"]
+    
     # current available categories of listings
     CATEGORY_CHOICES = (
         ('Electronics', 'Electronics'),

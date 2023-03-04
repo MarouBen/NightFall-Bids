@@ -10,7 +10,7 @@ from .models import User,Listing,ListingImage
 
 def index(request):
     # Here we get all the listing and the first image of each
-    listings = Listing.objects.all()      
+    listings = Listing.objects.all()     
     context = {
         "listings" : listings,
     }
