@@ -1,7 +1,7 @@
 body {
     padding: 10px;
     background-color:#f4f2f0!important;
-    /* background-color:#ffffff!important; */
+    /* background-color:whitesmoke!important; */
 }
 img.listing-image {
     width: 100%;
@@ -11,3 +11,23 @@ img.listing-image {
 .btn{
     bottom: 0;
 }
+
+.far,.fas:hover{
+    cursor: pointer;
+    
+}
+
+#heart:checked ~ .i1 {
+    display: none;
+    
+}
+#heart:not(checked) ~ .i2 {
+    display: none;
+    
+}
+#heart:checked ~ .i2 {
+    display: inline-block;
+}
+
+
+
