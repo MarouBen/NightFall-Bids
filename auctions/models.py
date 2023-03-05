@@ -18,21 +18,27 @@ class User(AbstractUser):
 
 class Listing(models.Model):
     """"The table that will hold the listing name, details text, starting bid(is also hoghest bid),
-    date when it was posted and finally an image"""
+    date when it was posted,it's state closed or open, a category and finally an image"""
     
     name = models.CharField(max_length=64)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    open = models.BooleanField(default=True)
     # current available categories of listings
     CATEGORY_CHOICES = (
         ('Electronics', 'Electronics'),
-        ('Clothing', 'Clothing'),
-        ('Books', 'Books'),
+        ('Fashion', 'Fashion'),
         ('Home & Garden', 'Home & Garden'),
-        ('Sports & Outdoors', 'Sports & Outdoors'),
+        ('Toys & Hobbies', 'Toys & Hobbies'),
+        ('Collectibles & Art', 'Collectibles & Art'),
+        ('Sporting Goods', 'Sporting Goods'),
+        ('Health & Beauty', 'Health & Beauty'),
+        ('Motors', 'Motors'),
+        ('Business & Industrial', 'Business & Industrial'),
+        ('Other', 'Other'),
     )
-    category = models.CharField(max_length=20,choices=CATEGORY_CHOICES)
+    category = models.CharField(max_length=50 ,choices=CATEGORY_CHOICES)
     # To make he listimng always sorted
     class Meta:
         ordering = ["-date"]

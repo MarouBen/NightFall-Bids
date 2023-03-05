@@ -128,6 +128,7 @@ def create(request):
 def item_view(request, pk, message=None):
     # Get the item and it's images
     Item = Listing.objects.get(pk=pk)
+    state = Listing.open
     Images = [img.images.url for img in Item.theImages.all()]
     
     # Is it in the watchlist of the user
@@ -142,6 +143,7 @@ def item_view(request, pk, message=None):
         "listing":Item,
         "images":Images,
         "watched":watched,
+        "open" : state,
         "message":message
     }
     return render(request, "auctions/item.html",context)
