@@ -240,4 +240,20 @@ def search(request):
         except Listing.DoesNotExist:
             pass
         
+        searched_listings = []
+        listings = Listing.objects.all()
+        
+        for listing in listings:
+            if query.upper().strip() in listing.name.upper():
+                searched_listings.append(listing)
+        
+        if searched_listings.__len__() > 0:
+            context = {
+                "listings":searched_listings
+            }
+            return render(request,"auctions/search.html",context)
+        else:
+            return render(request,"auctions/not_found.html")
+            
+        
         
