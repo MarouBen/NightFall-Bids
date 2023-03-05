@@ -228,6 +228,14 @@ def add_comment(request):
         )
         new_comment.save()
         return redirect("view",pk=pk)
+ 
+ 
+def view_search(request,context = None):
+     if context == None:
+         return render(request,"auctions/not_found.html")
+     else :
+         return render(request,"auctions/search.html",context)
+ 
     
 def search(request):
     if request.method == "POST":
@@ -252,9 +260,16 @@ def search(request):
                 "listings":searched_listings,
                 "Listing":Listing
             }
-            return render(request,"auctions/search.html",context)
+            return view_search(request,context)
         else:
-            return render(request,"auctions/not_found.html")
-            
+            return view_search(request)
         
-        
+  
+def categories(request, category):
+    listings = Listing.objects.filter(category=category).all()
+    context = {
+                "listings":listings,
+                "Listing":Listing,
+                "category":category
+            }
+    return view_search(request,context)
