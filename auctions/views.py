@@ -134,17 +134,20 @@ def item_view(request, pk, message=None):
     # Is it in the watchlist of the user
     ## Per default it's in false
     watched = False
+    owner = False
     if request.user.is_authenticated:
         user = request.user
         if Item in user.watchlist.all():
             watched = True
-            
+        if Item.user == user:
+            owner = True
     context = {
         "listing":Item,
         "images":Images,
         "watched":watched,
         "open" : state,
-        "message":message
+        "message":message,
+        "owner":owner
     }
     return render(request, "auctions/item.html",context)
 

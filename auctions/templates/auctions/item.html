@@ -50,7 +50,10 @@
                                         <input type="hidden" name="pk" value="{{ listing.pk }}">
                                         <input type="number" class="form-control" name="B" max="99999999" required/>
                                     </div>
-                                    <button class="btn btn-dark ms-1" type="submit">Bid on the item</button>
+                                    <button name="close" class="btn btn-dark ms-1" type="submit">Bid on the item</button>
+                                    {% if owner == True %}
+                                        <button type="button" class="btn btn-danger ms-2 p-0 pe-3 ps-3"><i class="fas fa-times-circle"></i> Close</button>
+                                    {% endif %}
                                 </form>
                                 {% if not watched %}
                                     <form action="{% url 'watchlist' %}" method="post">

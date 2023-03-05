@@ -20,10 +20,10 @@ class Listing(models.Model):
     """"The table that will hold the listing name, details text, starting bid(is also hoghest bid),
     date when it was posted,it's state closed or open, a category and finally an image"""
     
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=120)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name="listing")
     open = models.BooleanField(default=True)
     # current available categories of listings
     CATEGORY_CHOICES = (
