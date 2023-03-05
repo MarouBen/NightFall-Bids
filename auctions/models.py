@@ -12,7 +12,8 @@ def validate_image_extension(value):
 
 class User(AbstractUser):
     """"Users table is created by default by the class AbstractUser"""
-    pass
+    
+    watchlist = models.ManyToManyField("Listing", related_name='watchers', blank=True)
 
 
 class Listing(models.Model):
@@ -24,7 +25,6 @@ class Listing(models.Model):
     date = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     startingBid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
-
     # current available categories of listings
     CATEGORY_CHOICES = (
         ('Electronics', 'Electronics'),
@@ -63,3 +63,4 @@ class Comment(models.Model):
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    date_added = models.DateTimeField(auto_now_add=True)
