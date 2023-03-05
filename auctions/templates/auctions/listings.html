@@ -1,7 +1,7 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <form class="container" method="post" id="search_form" action="{% url 'search' %}">
+    <form class="container" method="get" id="search_form" action="{% url 'search' %}">
         {%csrf_token%}
         <div class="input-group">
             <input name="S" id="search" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />

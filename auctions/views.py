@@ -238,10 +238,14 @@ def view_search(request,context = None):
  
     
 def search(request):
-    if request.method == "POST":
-        query = request.POST.get("S")
+    if request.method == "GET":
+        query = request.GET.get("S")
+        category = request.GET.get("category")
         try:
-            listing = Listing.objects.filter(name=query).first()
+            if category:
+                listing = Listing.objects.filter(name=query,category=category).first()
+            else:
+                listing = Listing.objects.filter(name=query).first()
             if listing is not None:
                 pk = listing.pk
                 return redirect("view",pk=pk)
@@ -252,14 +256,25 @@ def search(request):
         listings = Listing.objects.all()
         
         for listing in listings:
-            if query.upper().strip() in listing.name.upper():
-                searched_listings.append(listing)
+            if category:
+                if query.upper().strip() in listing.name.upper() and category in listing.category:
+                    searched_listings.append(listing)
+            else:
+                if query.upper().strip() in listing.name.upper():
+                    searched_listings.append(listing)
         
         if searched_listings.__len__() > 0:
-            context = {
-                "listings":searched_listings,
-                "Listing":Listing
-            }
+            if category:
+                context = {
+                    "listings":searched_listings,
+                    "Listing":Listing,
+                    "category":category
+                }
+            else:
+                context = {
+                    "listings":searched_listings,
+                    "Listing":Listing,
+                }
             return view_search(request,context)
         else:
             return view_search(request)
