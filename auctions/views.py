@@ -128,7 +128,7 @@ def create(request):
 def item_view(request, pk, message=None):
     # Get the item and it's images
     Item = Listing.objects.get(pk=pk)
-    state = Listing.open
+    state = Item.open
     Images = [img.images.url for img in Item.theImages.all()]
     
     # Is it in the watchlist of the user
@@ -177,6 +177,7 @@ def watchlist(request):
     }
     return view_listings(request,context)
 
+
 @login_required
 def bid(request):
     # If the user is not loged in
@@ -196,3 +197,14 @@ def bid(request):
         return item_view(request,listing_pk,1)
     else:
         return item_view(request,listing_pk,0)
+    
+    
+@login_required
+def close(request):
+    if request.method == "POST":
+        pk = request.POST.get("pk")
+        listing = Listing.objects.get(pk=pk)
+        listing.open = False
+        listing.save()
+        print(listing.open)
+        return redirect("view",pk=pk)

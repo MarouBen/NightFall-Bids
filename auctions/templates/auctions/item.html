@@ -50,11 +50,25 @@
                                         <input type="hidden" name="pk" value="{{ listing.pk }}">
                                         <input type="number" class="form-control" name="B" max="99999999" required/>
                                     </div>
-                                    <button name="close" class="btn btn-dark ms-1" type="submit">Bid on the item</button>
-                                    {% if owner == True %}
-                                        <button type="button" class="btn btn-danger ms-2 p-0 pe-3 ps-3"><i class="fas fa-times-circle"></i> Close</button>
+                                    {% if open %}
+                                        <button name="close" class="btn btn-dark ms-1" type="submit">Bid on the item</button>
+                                    {% else %}
+                                        <button name="close" class="btn btn-dark ms-1" type="submit" disabled>Bid on the item</button>
                                     {% endif %}
+                                    
                                 </form>
+                                {% if owner == True %}
+                                    <form method="post" action="{% url 'close'%}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="pk" value="{{ listing.pk }}">
+                                        {% if open %}
+                                            <button type="submit" class="btn btn-danger ms-2  pe-3 ps-3" >
+                                                <i class="fas fa-times-circle"></i> Close
+                                            </button>
+                                        {% endif %}
+                                    </form>
+                                {% endif %}
+
                                 {% if not watched %}
                                     <form action="{% url 'watchlist' %}" method="post">
                                         {% csrf_token %}
@@ -72,6 +86,7 @@
                                         <label class="i1" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
                                     </form>
                                 {% endif %} 
+
                             </div>
                             <div class="text-helper"><small>Your bid should be higher than the current one! or add it to your watchlist.</small></div>
                             {% if message == 1 %}
