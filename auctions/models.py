@@ -24,7 +24,6 @@ class Listing(models.Model):
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    startingBid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
     # current available categories of listings
     CATEGORY_CHOICES = (
         ('Electronics', 'Electronics'),
@@ -51,10 +50,9 @@ class Bid(models.Model):
     
     bid = models.DecimalField(max_digits=10, decimal_places=2,validators=[MinValueValidator(0)])
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
-    def bidMinValue(self):
-        if self.bid < self.listing.startingBid:
-            raise ValidationError("Bid must be higher than the highest bid!")
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,related_name="bids")
+    class Meta:
+        ordering = ["-bid"]
     
     
 class Comment(models.Model):

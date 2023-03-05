@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.cache import never_cache
 
-from .models import User,Listing,ListingImage
+from .models import User,Listing,ListingImage,Bid
 
 
 def view_listings(request,context):
@@ -98,7 +98,7 @@ def create(request):
         # Saving the listing into it's table   
         new_listing = Listing(name=Title, 
                     description=Description, 
-                    startingBid=Bid, 
+                    bids=Bid, 
                     user=Owner,
                     category=Category)
         new_listing.save()
@@ -164,3 +164,11 @@ def watchlist(request):
         "title" : "Watchlist"
     }
     return view_listings(request,context)
+
+
+def bid(request):
+    listing_pk = request.POST.get('pk')
+    listing = Listing.objects.get(pk=listing_pk)
+    highestBid = listing.theBids.first()
+    print(highestBid)
+    

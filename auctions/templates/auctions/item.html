@@ -41,9 +41,10 @@
                             <strong><p style="font-size: 20px;">Description</p></strong>
                             <p>{{listing.description}}</p>
                             <div class=" d-flex">
-                                <form class="d-flex justify-content-left">
+                                <form class="d-flex justify-content-left" action="{% url 'bid' %}" method="post">
                                     {% csrf_token %}
                                     <div class="form-outline me-1" style="width: 100px;">
+                                        <input type="hidden" name="pk" value="{{ listing.pk }}">
                                         <input type="number" class="form-control" name="B" max="99999999" required/>
                                     </div>
                                     <button class="btn btn-dark ms-1" type="submit">Bid on the item</button>
