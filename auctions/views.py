@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.views.decorators.cache import never_cache
 
-from .models import User,Listing,ListingImage,Bid
+from .models import User,Listing,ListingImage,Bid,Comment
 
 
 def view_listings(request,context):
@@ -133,6 +133,7 @@ def item_view(request, pk, message=None):
     
     # Is it in the watchlist of the user
     ## Per default it's in false
+    ### also getting info if the user is the owner
     watched = False
     owner = False
     if request.user.is_authenticated:
@@ -141,13 +142,17 @@ def item_view(request, pk, message=None):
             watched = True
         if Item.user == user:
             owner = True
+            
+    # Getting the comments of the Item
+    comments = Item.comments.order_by("-date_added")
     context = {
         "listing":Item,
         "images":Images,
         "watched":watched,
         "open" : state,
         "message":message,
-        "owner":owner
+        "owner":owner,
+        "comments":comments 
     }
     return render(request, "auctions/item.html",context)
 
@@ -207,4 +212,19 @@ def close(request):
         listing.open = False
         listing.save()
         print(listing.open)
+        return redirect("view",pk=pk)
+    
+    
+@login_required
+def add_comment(request):
+    if request.method == "POST":
+        pk = request.POST.get("pk")
+        listing = Listing.objects.get(pk=pk)
+        comment = request.POST.get("comment")
+        new_comment = Comment(
+            comment=comment,
+            user=request.user,
+            listing=listing
+        )
+        new_comment.save()
         return redirect("view",pk=pk)

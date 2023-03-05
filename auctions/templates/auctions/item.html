@@ -121,24 +121,36 @@
                         <h4 class="my-4 h4">Comments</h4>
                         <div class="row d-flex justify-content-center">
                             <div class="col-lg-12">
-                              <div class="card shadow-4">
-                                <div class="card-body p-4">
-                                  <div class="form-outline mb-4">
-                                    <input type="text" id="addANote" class="form-control" placeholder="Type comment..." />
-                                    <label class="form-label" for="addANote">+ Add a note</label>
-                                  </div>
-                                  <div class="card">
-                                    <div class="card-body">
-                                      <p>TEXT</p>
-                                      <div class="d-flex justify-content-between">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <i class="fas fa-user-circle fa-2x"></i>
-                                            <p class="small mb-0 ms-2">User</p>
+                                <div class="card shadow-4" style="background-color: #f0f2f5;">
+                                    <div class="card-body p-4">
+                                        <form id="comments_form" method="post" action="{% url 'add_comment' %}">
+                                            {% csrf_token %}
+                                            <div class="form-outline mb-4">
+                                                <input type="hidden" name="pk" value="{{ listing.pk }}">
+                                                <input name="comment" type="text" id="addANote" class="form-control" placeholder="Type your comment and hit enter to add it" />
+                                                <label class="form-label" for="addANote">+ Add a note</label>
+                                            </div>
+                                        </form>
+                                        {%for cmt in comments%}
+                                        <!--comment card template-->
+                                        <div class="card mb-4">
+                                            <div class="card-body text-start">
+                                                <p>{{ cmt.comment }}</p>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <i class="fas fa-user-circle fa-2x"></i>
+                                                        <p class="small mb-0 ms-2">{{ cmt.user.username|title }}</p>
+                                                    </div>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <p class="small text-muted mb-0">Shared publicly - </p>
+                                                        <p class="small text-muted mb-0">{{ cmt.date_added }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                      </div>
+                                        <!--comment card template-->
+                                        {% endfor %}
                                     </div>
-                                  </div>
-                                </div>
                               </div>
                             </div>
                           </div>
@@ -147,4 +159,15 @@
             </div>
         </main>
     </main>
+    <script>
+        const form = document.getElementById('comments_form');
+        const input = document.getElementById('addANote"');
+    
+        input.addEventListener('keyup', function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            form.submit();
+            }
+        });
+    </script>
 {% endblock %}

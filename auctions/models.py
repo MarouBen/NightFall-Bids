@@ -66,5 +66,5 @@ class Comment(models.Model):
     
     comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE,related_name="comments")
     date_added = models.DateTimeField(auto_now_add=True)
