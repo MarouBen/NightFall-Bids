@@ -16,5 +16,6 @@ urlpatterns = [
     path("close", views.close, name="close"),
     path("add_comment", views.add_comment, name="add_comment"),
     path("search", views.search, name="search"),
-    path("search/category/<str:category>/", views.categories, name="category")
+    path("search/category/<str:category>/", views.categories, name="category"),
+    path("search/state/<str:state>/", views.state, name="state")
 ]

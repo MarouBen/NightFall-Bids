@@ -9,6 +9,7 @@
         </div>
     </form>
     <main class="my-5 m-5">
+        <h2 class="fw-bold text-center mb-3">{{title}}</h2>
         <div class="container-fluid">
         <div class="row">
             <div class="col-md-9 mb-4">
@@ -37,7 +38,18 @@
                 <section class="sticky-top" style="top: 20px;">
                     <!--Section: Ad-->
                     <div class="list-group list-group-light">
-                        <a class="list-group-item list-group-item-action px-3 border-0 list-group-item-dark" >Categories</a>
+                        <a class="list-group-item list-group-item-action px-3 border-0 list-group-item-dark" >State:</a>
+                        {% if open == "True" %}
+                            <a href="{% url 'state' 'True' %}" class="list-group-item list-group-item-action px-3 border-0 ripple active">Open</a>
+                            <a href="{% url 'state' 'False' %}" class="list-group-item list-group-item-action px-3 border-0 ripple">Closed</a>
+                        {% elif open == "False" %}
+                            <a href="{% url 'state' 'True' %}" class="list-group-item list-group-item-action px-3 border-0 ripple">Open</a>
+                            <a href="{% url 'state' 'False' %}" class="list-group-item list-group-item-action px-3 border-0 ripple active">Closed</a>
+                        {% else %}
+                            <a href="{% url 'state' 'True' %}" class="list-group-item list-group-item-action px-3 border-0 ripple">Open</a>
+                            <a href="{% url 'state' 'False' %}" class="list-group-item list-group-item-action px-3 border-0 ripple">Closed</a>
+                        {% endif %}
+                        <a class="list-group-item list-group-item-action px-3 border-0 list-group-item-dark" >Categories:</a>
                         {% for cat,label in Listing.CATEGORY_CHOICES  %}
                             {% if category == label %}
                                 <a href="{% url 'category' label %}" class="list-group-item list-group-item-action px-3 border-0 ripple active">{{label}}</a>

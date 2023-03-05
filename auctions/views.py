@@ -30,7 +30,7 @@ def listings(request):
         "title" : "Active Listings",
         "Listing":Listing
     }
-    return view_listings(request,context)
+    return render(request,"auctions/search.html",context)
 
 
 def login_view(request):
@@ -287,5 +287,15 @@ def categories(request, category):
                 "listings":listings,
                 "Listing":Listing,
                 "category":category
+            }
+    return view_search(request,context)
+
+
+def state(request, state):
+    listings = Listing.objects.filter(open=state).all()
+    context = {
+                "listings":listings,
+                "Listing":Listing,
+                "open":state
             }
     return view_search(request,context)

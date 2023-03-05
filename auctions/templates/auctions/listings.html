@@ -1,50 +1,29 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <form class="container" method="get" id="search_form" action="{% url 'search' %}">
-        {%csrf_token%}
-        <div class="input-group">
-            <input name="S" id="search" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-            <input type="hidden" name="category" value="{{ category }}" />
-            <button type="submit" class="btn btn-outline-dark">search</button>
-        </div>
-    </form>
-    <main class="my-5 m-5">
-        <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-9 mb-4">
-            <section>
-                {% for listing in listings %}
-                <!-- listing -->
-                    <div class="row shadow-4 mb-2" style="background-color:#ffffff;">
-                        <div class="col-md-4 mb-4 mt-4">
-                            <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
-                            <img src="{{ listing.theImages.first.images.url }}" class="img-fluid w-100 ripple" style=" height:270px; object-fit:cover;" />
-                            <a href="{% url 'view' listing.pk %}"><div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div></a>
+    <div class="container">
+        <section class="mb-10 text-center">
+            <h2 class="fw-bold mb-7 text-center">{{ title }}</h2>
+            <div class="row gx-lg-5">
+                {% for listing in listings%}
+                    <!-- cartd template -->
+                    <div class="col-lg-4 mb-6 mb-lg-5">
+                        <div class="card rounded-6 h-100">
+                            <div class="bg-image hover-overlay ripple shadow-4-strong" data-mdb-ripple-color="light">
+                                <img src="{{ listing.theImages.first.images.url }}" class="img-fluid listing-image" image/>
+                                <a href="{% url 'view' listing.pk %}"><div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div></a>
+                            </div>
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <h5 class="card-title fw-bold">{{ listing.name|truncatechars:50 }}</h5>
+                                <p class="card-text">{{ listing.description|truncatechars:120 }}</p>         
+                                <p class="card-text"><b>Curent highest bid:</b> ${{ listing.bids.first.bid }}</p>
+                                <a href="{% url 'view' listing.pk %}" class="btn btn-secondary">View</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-8 mb-4 mt-4">
-                        <h5>{{ listing.name }}</h5>
-                        <p>{{ listing.description|truncatechars:200 }}</p>
-                        <a class="btn btn-dark" href="{% url 'view' listing.pk %}">View</a>
-                    </div>
-                    </div>
-                    <!-- listing -->
-                {% endfor %}
-                </section>
+                    <!-- card template -->
+                    {% endfor %}
             </div>
-
-            <div class="col-md-3 mb-4">
-                <section class="sticky-top" style="top: 20px;">
-                    <!--Section: Ad-->
-                    <div class="list-group list-group-light">
-                        <a class="list-group-item list-group-item-action px-3 border-0 list-group-item-dark" >Categories</a>
-                        {% for cat,label in Listing.CATEGORY_CHOICES  %}   
-                            <a href="{% url 'category' label %}" class="list-group-item list-group-item-action px-3 border-0 ripple">{{label}}</a>
-                        {% endfor %}
-                    </div>
-                    <!--Section: Ad-->
-                </section>
-            </div>
-        </main>
-{% endblock body %}
+        </section>
+    </div>
+{% endblock %}
