@@ -121,9 +121,19 @@ def item_view(request, pk):
     # Get the item and it's images
     Item = Listing.objects.get(pk=pk)
     Images = [img.images.url for img in Item.theImages.all()]
+    
+    # Is it in the watchlist of the user
+    if request.user.is_authenticated:
+        user = request.user
+        if Item in user.watchlist.all():
+            watched = True
+        else:
+            watched = False
+            
     context = {
         "listing":Item,
-        "images":Images
+        "images":Images,
+        "watched":watched
     }
     return render(request, "auctions/item.html",context)
 
@@ -135,7 +145,11 @@ def watchlist(request):
         listing_pk = request.POST.get('watch')
         listing = Listing.objects.get(pk=listing_pk)
         
-        user.watchlist.add(listing)
+        if request.POST.get("action") == "add":
+            user.watchlist.add(listing)
+        else:
+            user.watchlist.remove(listing)
+    
         return redirect("watchlist")
     
     # If the user is not loged in
