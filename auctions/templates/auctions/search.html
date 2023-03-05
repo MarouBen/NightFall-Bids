@@ -1,5 +1,12 @@
 {% extends 'auctions/layout.html' %}
 {% block body %}
+<form class="container" method="post" id="search_form" action="{% url 'search' %}">
+    {%csrf_token%}
+    <div class="input-group">
+        <input name="S" id="search" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="submit" class="btn btn-outline-dark">search</button>
+    </div>
+</form>
 <main class="my-5 m-5">
     <div class="container-fluid">
       <div class="row">
@@ -29,12 +36,10 @@
             <section class="sticky-top" style="top: 80px;">
                 <!--Section: Ad-->
                 <div class="list-group list-group-light">
-                    <a href="#" class="list-group-item list-group-item-action px-3 border-0 active" aria-current="true">
-                      The current link item</a>
-                    <a href="#" class="list-group-item list-group-item-action px-3 border-0">A second link item</a>
-                    <a href="#" class="list-group-item list-group-item-action px-3 border-0">A third link item</a>
-                    <a href="#" class="list-group-item list-group-item-action px-3 border-0">A fourth link item</a>
-                    <a class="list-group-item list-group-item-action px-3 border-0 disabled">A disabled link item</a>
+                    <a class="list-group-item list-group-item-action px-3 border-0 list-group-item-dark" >Categories</a>
+                    {% for cat,label in Listing.CATEGORY_CHOICES  %}
+                        <a href="#" class="list-group-item list-group-item-action px-3 border-0 ripple">{{label}}</a>
+                    {% endfor %}
                 </div>
                 <!--Section: Ad-->
             </section>

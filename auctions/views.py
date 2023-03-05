@@ -249,7 +249,8 @@ def search(request):
         
         if searched_listings.__len__() > 0:
             context = {
-                "listings":searched_listings
+                "listings":searched_listings,
+                "Listing":Listing
             }
             return render(request,"auctions/search.html",context)
         else:
