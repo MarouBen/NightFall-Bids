@@ -89,19 +89,25 @@ def create(request):
     if request.method == "POST":
         
         Title = request.POST.get("T","").strip()
-        Bid = request.POST.get("B","").strip()
+        bid = request.POST.get("B","").strip()
         Description = request.POST.get("D","").strip()
         Category = request.POST.get("C")
         Images = request.FILES.getlist("I")
         Owner = request.user
-        print(Category)
+
         # Saving the listing into it's table   
         new_listing = Listing(name=Title, 
                     description=Description, 
-                    bids=Bid, 
                     user=Owner,
                     category=Category)
         new_listing.save()
+        
+        new_bid = Bid(
+            bid=bid,
+            user=request.user,
+            listing=new_listing
+        )
+        new_bid.save()
         
         # Save the images into the images table related the the listing
         for Image in Images:
@@ -169,6 +175,7 @@ def watchlist(request):
 def bid(request):
     listing_pk = request.POST.get('pk')
     listing = Listing.objects.get(pk=listing_pk)
-    highestBid = listing.theBids.first()
+    highestBid = listing.bids.first()
     print(highestBid)
+    return redirect("view",pk = listing_pk)
     
