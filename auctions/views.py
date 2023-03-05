@@ -27,7 +27,8 @@ def listings(request):
     listings = Listing.objects.all()      
     context = {
         "listings" : listings,
-        "title" : "Active Listings"
+        "title" : "Active Listings",
+        "Listing":Listing
     }
     return view_listings(request,context)
 
