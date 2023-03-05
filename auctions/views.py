@@ -117,7 +117,7 @@ def create(request):
     })
     
     
-def listing_view(request, pk):
+def item_view(request, pk):
     # Get the item and it's images
     Item = Listing.objects.get(pk=pk)
     Images = [img.images.url for img in Item.theImages.all()]
