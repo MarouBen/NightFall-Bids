@@ -1,5 +1,4 @@
 {% extends "auctions/layout.html"%}
-
 {% block body %}
     <main class="mt-5">
         <div class="container">
@@ -49,21 +48,21 @@
                                     </div>
                                     <button class="btn btn-dark ms-1" type="submit">Bid on the item</button>
                                 </form>
-                                {% if watched %}
-                                    <form action="{% url 'watchlist' %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="action" value="remove">
-                                        <input id="heart" name="watch" value="{{ listing.pk }}" type="checkbox" onchange="this.form.submit()" hidden/>
-                                        <label class="i2" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                        <label class="i1" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                    </form>
-                                {% else %}
+                                {% if not watched%}
                                     <form action="{% url 'watchlist' %}" method="post">
                                         {% csrf_token %}
                                         <input type="hidden" name="action" value="add">
                                         <input id="heart" name="watch" value="{{ listing.pk }}" type="checkbox" onchange="this.form.submit()" hidden/>
                                         <label class="i1" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
                                         <label class="i2" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
+                                    </form>
+                                {% else %}
+                                    <form action="{% url 'watchlist' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="action" value="remove">
+                                        <input id="heart" name="watch" value="{{ listing.pk }}" type="checkbox" onchange="this.form.submit()" hidden/>
+                                        <label class="i2" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
+                                        <label class="i1" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
                                     </form>
                                 {% endif %} 
                             </div>

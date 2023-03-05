@@ -5,6 +5,7 @@ from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.views.decorators.cache import never_cache
 
 from .models import User,Listing,ListingImage
 
@@ -82,6 +83,7 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+
 @login_required
 def create(request):
     if request.method == "POST":
@@ -116,24 +118,24 @@ def create(request):
         "categories" : Listing.CATEGORY_CHOICES
     })
     
-    
+@never_cache
 def item_view(request, pk):
     # Get the item and it's images
     Item = Listing.objects.get(pk=pk)
     Images = [img.images.url for img in Item.theImages.all()]
     
     # Is it in the watchlist of the user
+    ## Per default it's in false
+    watched = False
     if request.user.is_authenticated:
         user = request.user
         if Item in user.watchlist.all():
             watched = True
-        else:
-            watched = False
             
     context = {
         "listing":Item,
         "images":Images,
-        "watched":watched
+        "watched":watched,
     }
     return render(request, "auctions/item.html",context)
 
