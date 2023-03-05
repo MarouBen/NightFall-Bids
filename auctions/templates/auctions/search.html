@@ -26,6 +26,15 @@
                     <div class="col-md-8 mb-4 mt-4">
                         <h5>{{ listing.name }}</h5>
                         <p>{{ listing.description|truncatechars:200 }}</p>
+                        <p>
+                        {% if listing.open %}
+                            <a href="{% url 'state' 'True' %}"><span class="badge bg-info me-1">Open</span></a>
+                        {% else %}
+                            <a href="{% url 'state' 'False' %}"><span class="badge bg-danger me-1">Closed</span></a>
+                        {% endif %}
+                        <a href="{% url 'category' listing.category %}"><span class="badge bg-dark me-1">{{listing.category}}</span></a>
+                        </p>
+                        
                         <a class="btn btn-dark" href="{% url 'view' listing.pk %}">View</a>
                     </div>
                     </div>

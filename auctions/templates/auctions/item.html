@@ -32,11 +32,11 @@
                                     <span class="fw-bold" style="font-size: 35px;">{{listing.name}}</span>
                                 </div>
                                 <div class="d-flex"> 
-                                    <a href=""><span class="badge bg-dark me-1">{{listing.category}}</span></a>
+                                    <a href="{% url 'category' listing.category %}"><span class="badge bg-dark me-1">{{listing.category}}</span></a>
                                     {% if open %}
-                                        <a href=""><span class="badge bg-info me-1">Open</span></a>
+                                        <a href="{% url 'state' 'True' %}"><span class="badge bg-info me-1">Open</span></a>
                                     {% else %}
-                                        <a href=""><span class="badge bg-danger me-1">Closed</span></a>
+                                        <a href="{% url 'state' 'False' %}"><span class="badge bg-danger me-1">Closed</span></a>
                                     {% endif %}
                                 </div>
                             </div>
