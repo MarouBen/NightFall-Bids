@@ -228,3 +228,16 @@ def add_comment(request):
         )
         new_comment.save()
         return redirect("view",pk=pk)
+    
+def search(request):
+    if request.method == "POST":
+        query = request.POST.get("S")
+        try:
+            listing = Listing.objects.filter(name=query).first()
+            if listing is not None:
+                pk = listing.pk
+                return redirect("view",pk=pk)
+        except Listing.DoesNotExist:
+            pass
+        
+        
