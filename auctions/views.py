@@ -9,11 +9,15 @@ from django.http import JsonResponse
 from .models import User,Listing,ListingImage
 
 
+def view_listings(request,context):
+    return render(request,"auctions/listings.html",context)
+
+
 def index(request):
     # Here we get all the listing and the first image of each
-    listings = Listing.objects.all() 
+    listings = Listing.objects.all()
     context = {
-        "listings" : listings,
+        "listings" : listings
     }
     return render(request, "auctions/index.html",context)
 
@@ -22,8 +26,10 @@ def listings(request):
     listings = Listing.objects.all()      
     context = {
         "listings" : listings,
+        "title" : "Active Listings"
     }
-    return render(request, "auctions/listings.html",context)
+    return view_listings(request,context)
+
 
 def login_view(request):
     if request.method == "POST":
@@ -122,10 +128,23 @@ def listing_view(request, pk):
     return render(request, "auctions/item.html",context)
 
 
+@login_required
 def watchlist(request):
+    user = request.user
     if request.method == 'POST':
-        watch = []
         listing_pk = request.POST.get('watch')
-        watch.append(listing_pk)
-        print(watch)
-        return redirect("index")
+        listing = Listing.objects.get(pk=listing_pk)
+        
+        user.watchlist.add(listing)
+        return redirect("watchlist")
+    
+    # If the user is not loged in
+    if not request.user.is_authenticated:
+        return redirect("login")
+    
+    watched_listings = user.watchlist.all()     
+    context = {
+        "listings" : watched_listings,
+        "title" : "Watchlist"
+    }
+    return view_listings(request,context)
