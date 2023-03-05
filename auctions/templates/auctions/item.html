@@ -40,7 +40,16 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <p class="lead"><span> Current highest bid: <span class="fw-bold ">${{ listing.bids.first.bid }}</span></span></p>
+                            {% if open %}
+                                <p class="lead"><span> Current highest bid: <span class="fw-bold ">${{ listing.bids.first.bid }}</span></span></p>
+                            {% else %}
+                                <p class="lead">
+                                    <span><i class="fas fa-trophy"></i> Winner: 
+                                        <span class="fw-bold ">{{ listing.bids.first.user|title }}</span> with a bid of: 
+                                        <span class="fw-bold ">${{ listing.bids.first.bid }}</span>
+                                    </span>
+                                </p>
+                            {% endif %}
                             <strong><p style="font-size: 20px;">Description</p></strong>
                             <p>{{listing.description}}</p>
                             <div class=" d-flex">
