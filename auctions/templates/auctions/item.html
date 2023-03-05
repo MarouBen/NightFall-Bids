@@ -1,9 +1,9 @@
 {% extends "auctions/layout.html"%}
 {% block body %}
-    <main class="mt-5">
-        <div class="container">
-            <div class="row shadow-4" style="background-color:#ffffff;">
-                <div id="caroussel" class="col-md-6 mb-4 mt-4 ">
+    <main class="m-5">
+        <div class=" container-fluid">
+            <div class="row shadow-4 w-100" style="background-color:#ffffff;">
+                <div id="caroussel" class="col-5 mb-4 mt-4">
                     <div id="carouselExampleCrossfade" class="carousel slide carousel-fade carousel" data-mdb-ride="carousel">
                         <div class="carousel-inner" >
                             <div class="carousel-item active">
@@ -25,7 +25,7 @@
                         </button>
                       </div>                
                     </div>
-                    <div class="col-md-6 mb-4">
+                    <div class="col-7 mb-4">
                         <div class="p-4">
                             <div class="mb-3">
                                 <div class="me-auto">
@@ -37,7 +37,7 @@
                                     <a href=""><span class="badge bg-danger me-1">Closed</span></a>
                                 </div>
                             </div>
-                            <p class="lead"><span> Current highest bid: <span class="fw-bold ">$100</span></span></p>
+                            <p class="lead"><span> Current highest bid: <span class="fw-bold ">${{ listing.bids.first.bid }}</span></span></p>
                             <strong><p style="font-size: 20px;">Description</p></strong>
                             <p>{{listing.description}}</p>
                             <div class=" d-flex">
@@ -68,6 +68,17 @@
                                 {% endif %} 
                             </div>
                             <div class="text-helper"><small>Your bid should be higher than the current one! or add it to your watchlist.</small></div>
+                            {% if message == 1 %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-check-circle"></i>
+                                    <strong> Success!</strong> Your bid has been recorded.
+                                </div>
+                            {% elif message == 0 %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <strong> Failed!</strong> Your bid should be higher the the highest bid.
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -104,6 +115,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </main>
 {% endblock %}

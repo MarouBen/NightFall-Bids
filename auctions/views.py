@@ -125,7 +125,7 @@ def create(request):
     })
     
 @never_cache
-def item_view(request, pk):
+def item_view(request, pk, message=None):
     # Get the item and it's images
     Item = Listing.objects.get(pk=pk)
     Images = [img.images.url for img in Item.theImages.all()]
@@ -142,6 +142,7 @@ def item_view(request, pk):
         "listing":Item,
         "images":Images,
         "watched":watched,
+        "message":message
     }
     return render(request, "auctions/item.html",context)
 
@@ -173,9 +174,18 @@ def watchlist(request):
 
 
 def bid(request):
-    listing_pk = request.POST.get('pk')
+    listing_pk = request.POST.get("pk")
+    user_bid = int(request.POST.get("B",0))
     listing = Listing.objects.get(pk=listing_pk)
-    highestBid = listing.bids.first()
-    print(highestBid)
-    return redirect("view",pk = listing_pk)
+    highestBid = int(listing.bids.first().bid)
+    if user_bid > highestBid:
+        new_bid = Bid(
+            bid=user_bid,
+            user=request.user,
+            listing=listing
+        )
+        new_bid.save()
+        return item_view(request,listing_pk,1)
+    else:
+        return item_view(request,listing_pk,0)
     
