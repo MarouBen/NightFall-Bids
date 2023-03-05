@@ -172,8 +172,11 @@ def watchlist(request):
     }
     return view_listings(request,context)
 
-
+@login_required
 def bid(request):
+    # If the user is not loged in
+    if not request.user.is_authenticated:
+        return redirect("login")
     listing_pk = request.POST.get("pk")
     user_bid = int(request.POST.get("B",0))
     listing = Listing.objects.get(pk=listing_pk)
@@ -188,4 +191,3 @@ def bid(request):
         return item_view(request,listing_pk,1)
     else:
         return item_view(request,listing_pk,0)
-    
