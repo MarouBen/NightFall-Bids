@@ -16,7 +16,7 @@ def view_listings(request,context):
 
 def index(request):
     # Here we get all the listing and the first image of each
-    listings = Listing.objects.all()
+    listings = Listing.objects.filter(open=True).all()
     context = {
         "listings" : listings
     }
