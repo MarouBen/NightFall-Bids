@@ -10,10 +10,6 @@ from django.views.decorators.cache import never_cache
 from .models import User,Listing,ListingImage,Bid,Comment
 
 
-def view_listings(request,context):
-    return render(request,"auctions/listings.html",context)
-
-
 def index(request):
     # Here we get all the listing and the first image of each
     listings = Listing.objects.filter(open=True).all()
@@ -179,9 +175,10 @@ def watchlist(request):
     watched_listings = user.watchlist.all()     
     context = {
         "listings" : watched_listings,
-        "title" : "Watchlist"
+        "title" : "Watchlist",
+        "user" : user
     }
-    return view_listings(request,context)
+    return render(request,"auctions/watchlist.html",context)
 
 
 @login_required
