@@ -12,39 +12,80 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     </head>
     <body >
-        <div style="background-color:transparent !important;">
+        {% comment %} <div>
             {% if user.is_authenticated %}
                 Signed in as <strong>{{ user.username }}</strong>.
             {% else %}
                 Not signed in.
             {% endif %}
         </div>
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'listings' %}">Active Listings</a>
-            </li>
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create' %}">Create Listing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
-                </li>
-            {% endif %}
-        </ul>
+        <ul class="nav"> {% endcomment %}
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color:#131313; ">
+                <!-- Container wrapper -->
+                <div class="container-fluid ms-4 me-4" >
+                    <!-- Toggle button -->
+                    <button 
+                        class="navbar-toggler" 
+                        type="button" 
+                        data-mdb-toggle="collapse" 
+                        data-mdb-target="#navbarSupportedContent1" 
+                        aria-controls="navbarSupportedContent1" 
+                        aria-expanded="false" 
+                        aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+            
+                    <!-- Collapsible wrapper -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                        <!-- Navbar brand -->
+                        <a class="navbar-brand mt-2 mt-sm-0" href="{% url 'index' %}">
+                            <strong>NB</strong>
+                        </a>
+                        <!-- Left links -->
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'listings' %}">All Listings</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'create' %}">List Item</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'watchlist' %}">Watchlist</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <!-- Left links -->
+                    </div>
+                    <!-- Collapsible wrapper -->
+            
+                    <!-- Right elements -->
+                    <div class="d-flex align-items-center">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            {% if user.is_authenticated %}
+                                <li class="nav-item" style="color:whitesmoke;">
+                                    <span class="nav-link">Hi <span class="fw-bold" style="color:#FAF0E6;">{{ user.username|title }}</span></span>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'register' %}">register</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!-- Right elements -->
+                </div>
+                <!-- Container wrapper -->
+            </nav>
         <hr>
         {% block body %}
         {% endblock %}
