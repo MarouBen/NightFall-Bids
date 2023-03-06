@@ -1,6 +1,21 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
+
+    <!-- Background image -->
+    <div id="intro" class="bg-image shadow-2-strong"></div>
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.5);">
+        <div class="container d-flex align-items-center justify-content-center text-center h-100">
+            <div id="bigTitle" class="text-white">
+                <h1 class="mb-3">Nightfall Bids</h1>
+                <h5 class="mb-4">Auctions under the stars where the deals come out to play.</h5>
+                <a href="{% url 'create' %}" class="btn btn-outline-light btn-lg m-2" > List an item </a>
+                <div href="" class="btn btn-outline-light btn-lg m-2"  onclick="scrollToTarget()"> Start biding </div>
+            </div>
+        </div>
+    </div>
+    
+      <!-- Background image -->
     <form class="container" method="get" id="search_form" action="{% url 'search' %}">
         {%csrf_token%}
         <div class="input-group">
@@ -10,7 +25,7 @@
     </form>
     <div class="container">
         <section class="mb-10 text-center">
-            <h2 class="fw-bold mb-7 text-center">Featured</h2>
+            <h2 id="scrollTarget" class="fw-bold mb-7 text-center">Featured</h2>
             <div class="row gx-lg-5">
                 {% for listing in listings|slice:":6" %}
                     <!-- cartd template -->
@@ -39,6 +54,9 @@
         </section>
     </div>
     <script>
+        function scrollToTarget() {
+            document.getElementById("scrollTarget").scrollIntoView({ behavior: 'smooth' });
+          }
         const form = document.getElementById('search_form');
         const input = document.getElementById('search"');
     

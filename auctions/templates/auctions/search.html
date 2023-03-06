@@ -16,10 +16,10 @@
             <section>
                 {% for listing in listings %}
                 <!-- listing -->
-                    <div class="row shadow-4 mb-2" style="background-color:#ffffff;">
+                    <div class="row shadow-5-strong mb-3" style="background-color:#ffffff;">
                         <div class="col-md-4 mb-4 mt-4">
                             <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
-                            <img src="{{ listing.theImages.first.images.url }}" class="img-fluid w-100 ripple" style=" height:270px; object-fit:cover;" />
+                            <img src="{{ listing.theImages.first.images.url }}" class="img-fluid rounded-4 w-100 ripple" style=" height:270px; object-fit:cover;" />
                             <a href="{% url 'view' listing.pk %}"><div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div></a>
                         </div>
                     </div>
