@@ -63,7 +63,6 @@
 
 
 
-
 .cta {
     border: none;
     background: none;
@@ -71,10 +70,7 @@
   
 .cta span {
     padding-bottom: 7px;
-    letter-spacing: 4px;
-    font-size: 14px;
     padding-right: 15px;
-    text-transform: uppercase;
 }
 
 .cta svg {
@@ -99,7 +95,7 @@
 .hover-underline-animation:after {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 125%;
     transform: scaleX(0);
     height: 2px;
     bottom: 0;

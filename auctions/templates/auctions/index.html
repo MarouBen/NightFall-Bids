@@ -52,19 +52,19 @@
                 <div class="row gx-lg-5">
                     {% for listing in listings|slice:":6" %}
                         <!-- cartd template -->
-                        <div class="col-lg-4 mb-6 mb-lg-5">
+                        <div class="col-lg-4 mb-6 mb-lg-5 ">
                             <div class="card rounded-6 h-100">
                                 <div class=" bg-image hover-overlay ripple shadow-4-strong " data-mdb-ripple-color="light">
                                     <img src="{{ listing.theImages.first.images.url }}" class="img-fluid listing-image" image/>
                                     <a href="{% url 'view' listing.pk %}"><div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div></a>
                                 </div>
-                                <div class="card-body d-flex flex-column justify-content-between">
+                                <div class="card-body d-flex flex-column justify-content-between shadow-4">
                                     <h5 class="card-title fw-bold">{{ listing.name|truncatechars:50 }}</h5>
                                     <p class="card-text">{{ listing.description|truncatechars:120 }}</p>         
                                     <p class="card-text"><b>Curent highest bid:</b> ${{ listing.bids.first.bid }}</p>
                                     <a href="{% url 'view' listing.pk %}" class="d-flex justify-content-end">
                                         <button class="cta">
-                                            <span class="hover-underline-animation"> view now </span>
+                                            <span class="hover-underline-animation fw-bold text-uppercase"> view now </span>
                                             <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
                                                 <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
                                             </svg>
