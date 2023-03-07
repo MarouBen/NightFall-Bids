@@ -12,15 +12,8 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     </head>
     <body >
-        {% comment %} <div>
-            {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
-            {% else %}
-                Not signed in.
-            {% endif %}
-        </div>
-        <ul class="nav"> {% endcomment %}
-            <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color:#131313; ">
+        {% comment %} #131313;  {% endcomment %}
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color:#131313;">
                 <!-- Container wrapper -->
                 <div class="container-fluid ms-4 me-4" >
                     <!-- Toggle button -->
@@ -80,6 +73,16 @@
                                     <a class="nav-link" href="{% url 'register' %}">register</a>
                                 </li>
                             {% endif %}
+                            <li>
+                                <div class="container h-100">
+                                    <form action="{% url 'search' %}" method="get" id="search_form" class="d-flex justify-content-center h-100" action="{% url 'search' %}">
+                                        <div class="searchbar">
+                                            <input type="text" class="search_input" id="search_input" name="S" placeholder="search here..." />
+                                            <label class="search_icon"><i class="fas fa-search"></i></label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <!-- Right elements -->
