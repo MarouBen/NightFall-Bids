@@ -3,8 +3,8 @@
     
     <main class="my-5 m-5 pt-5">
         
-        <h2 class="fw-bold text-center mb-3">{{title}}</h2>
-        <form class="input-container container w-75 mb-3" method="get" id="search_form" action="{% url 'search' %}">
+        <h1 class="fw-bold text-center mb-3">{{title}}</h1>
+        <form class="input-container container w-75 mb-4" method="get" id="search_form" action="{% url 'search' %}">
             {%csrf_token%}
             <input type="text" name="S" class="input" placeholder="search...">
             <input type="hidden" name="category" value="{{ category }}" />

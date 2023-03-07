@@ -1,9 +1,17 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <div class="container">
-        <section class="mb-10 text-center">
-            <h2 class="fw-bold mb-7 text-center">{{ title }}</h2>
+    <div class="container mt-5 pt-5 bg-whitesmoke">
+        <section class="text-center">
+            <h1 class="fw-bold text-center">{{ title }}</h1>
+            <hr class="my-5">
+            <div class="note note-secondary mb-4 text-start">
+                <strong>Hearted Listings:</strong> Your watchlist is the perfect place to keep track of auctions that you're interested in.
+                When you find an auction that catches your eye, simply click the heart icon to save it to your hearted listings.
+                <b>Be sure to stay vigilant, as other buyers may also be interested in these listings!</b><br> If you change your mind or no
+                longer want to keep an auction in your watchlist, you can remove it at any time by clicking the heart icon again.
+                This way, you can keep your watchlist up-to-date with the latest auctions that you're truly interested in.
+              </div>
             <div class="row gx-lg-5">
                 {% for listing in listings%}
                     <!-- cartd template -->
@@ -17,8 +25,7 @@
                                 <h5 class="card-title fw-bold">{{ listing.name|truncatechars:50 }}</h5>
                                 <p class="card-text">{{ listing.description|truncatechars:120 }}</p>         
                                 <p class="card-text"><b>Curent highest bid:</b> ${{ listing.bids.first.bid }}</p>
-                                <div class="d-flex justify-content-center">
-                                    <a href="{% url 'view' listing.pk %}" class="btn btn-secondary w-75">View</a>
+                                <div class="d-flex justify-content-between">
                                     <div class="d-flex">
                                         {% if listing in user.watchlist %}
                                             <form action="{% url 'watchlist' %}" method="post">
@@ -36,9 +43,18 @@
                                                 <label class="i2" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
                                                 <label class="i1" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
                                             </form>
-                                        
                                         {% endif %} 
-                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="{% url 'view' listing.pk %}" class="d-flex justify-content-end mt-2">
+                                            <button class="cta">
+                                                <span class="hover-underline-animation fw-bold text-uppercase"> view now </span>
+                                                <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
+                                                    <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
+                                                </svg>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                                 
                             </div>
