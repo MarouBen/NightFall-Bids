@@ -62,15 +62,17 @@
                                     <h5 class="card-title fw-bold">{{ listing.name|truncatechars:50 }}</h5>
                                     <p class="card-text">{{ listing.description|truncatechars:120 }}</p>         
                                     <p class="card-text"><b>Curent highest bid:</b> ${{ listing.bids.first.bid }}</p>
-                                    <a href="{% url 'view' listing.pk %}" class="btn btn-secondary">View</a>
+                                    <a href="{% url 'view' listing.pk %}" class="btn btn-secondary btn-dark">View</a>
                                 </div>
                             </div>
                         </div>
                         <!-- card template -->
                         {% endfor %}
-                        <div class="text-center">
-                            <a href="{% url 'create' %}" class="btn btn-outline-dark btn-lg fw-bold w-25 me-3 "> List an item </a>
-                            <a href="{% url 'listings' %}" class="btn btn-dark btn-lg fw-bold w-25 "> See more </a>
+                        <div class=" d-flex text-center flex-row-reverse">
+                            <a href="{% url 'listings' %}" class="btn btn-dark btn-lg fw-bold " style="width:20%;"> See more <svg viewBox="0 0 16 16" class="bi bi-arrow-right" fill="currentColor" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" fill-rule="evenodd"></path>
+                            </svg> </a>
+                            <a href="{% url 'create' %}" class="btn btn-outline-dark btn-lg fw-bold me-3"style="width:20%;"> List an item </a>
                         <div>
                 </div>
             </section>
