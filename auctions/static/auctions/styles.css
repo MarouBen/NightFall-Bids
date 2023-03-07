@@ -81,7 +81,12 @@ img.listing-image {
     display: inline-block;
 }
 
+.bg-create{
+    height: 97.5vh; 
+    background-image: url('/static/auctions/DarkAuctionHouse.png');
+    background-size: cover;
+    background-position: center;
 
-
+}
 
 
