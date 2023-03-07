@@ -12,7 +12,6 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
     </head>
     <body >
-        {% comment %} #131313;  {% endcomment %}
             <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color:#131313;">
                 <!-- Container wrapper -->
                 <div class="container-fluid ms-4 me-4" >
@@ -52,29 +51,29 @@
                             {% endif %}
                         </ul>
                         <!-- Left links -->
-                    </div>
+                    
                     <!-- Collapsible wrapper -->
             
                     <!-- Right elements -->
-                    <div class="d-flex align-items-center">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
+                        <ul class="navbar-nav mb-2 mb-lg-0">
                             {% if user.is_authenticated %}
                                 <li class="nav-item" style="color:whitesmoke;">
                                     <span class="nav-link">Hi <span class="fw-bold" style="color:#FAF0E6;">{{ user.username|title }}</span></span>
                                 </li>
-                                <li class="nav-item active">
+                                <li class="nav-item me-3 me-lg-0">
                                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                                 </li>
                             {% else %}
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                                <li class="nav-item me-3 me-lg-0">
+                                    <a class="nav-link" href="{% url 'login' %}">Login </a>
                                 </li>
-                                <li class="nav-item active">
+                                <li class="nav-item me-3 me-lg-0">
                                     <a class="nav-link" href="{% url 'register' %}">register</a>
                                 </li>
                             {% endif %}
-                            <li>
-                                <div class="container h-100">
+                            <li class="nav-item me-3 me-lg-0">
+                                <div class="container h-100 p-0 nav-link">
                                     <form action="{% url 'search' %}" method="get" id="search_form" class="d-flex justify-content-center h-100" action="{% url 'search' %}">
                                         <div class="searchbar">
                                             <input type="text" class="search_input" id="search_input" name="S" placeholder="search here..." />
@@ -85,6 +84,7 @@
                             </li>
                         </ul>
                     </div>
+                    
                     <!-- Right elements -->
                 </div>
                 <!-- Container wrapper -->
