@@ -90,6 +90,7 @@ img.listing-image {
 
 
 
+
 .LR_main{
      box-sizing: border-box;
      background-color: #f6f5f7;
@@ -97,61 +98,30 @@ img.listing-image {
      align-items: center;
      flex-direction: column;
      overflow: hidden;
-     height:100vh
+     height: 100svh;
+}
+.LR_container{
+    background-color: #FFF;
+    border-radius: 25px;
+    box-shadow: 0 14px 28px rgba(0, 0 , 0, 0.25), 0 10px 10px rgba(0, 0 , 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 60%!important;
+    max-width: 100%;
+    min-height: 600px;
+}
+@media (max-width: 1000px) {
+    .LR_container {
+        width: 100%!important;
+        margin: auto!important;
+    }
 }
 .content{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.content input{
-    accent-color: #333;
-    width: 12px;
-    height: 12px;
-}
-.content label{
-    font-size: 14px;
-    user-select: none;
-}
-.LR_main button{
-    position: relative;
-    border-radius: 20px;
-    border: 1px solid #4bb6b7;
-    background-color: #4bb6b7;
-    color: #fff;
-    font-weight: 700;
-    transition: 0.3 ease-in-out;
-}
-.LR_main button:hover{
-    letter-spacing: 3px;
-}
-.LR_main button:active{
-    transform: scale(0.95);
-}
-.ghost{
-    background-color: rgba(255, 255 , 255, 0.2);
-    border: 2px solid #fff;
-    color: #fff;
-}
-.ghost i{
-    position: absolute;
-    opacity: 0;
-    transition: 0.3s ease-in-out;
-}
-.ghost .register{
-    right: 70px;
-}
-.ghost .login{
-    left: 70px;
-}
-.ghost:hover .register{
-    right: 40px;
-    opacity: 1;
-}
-.ghost:hover .lgin{
-    left: 40px;
-    opacity: 1;
-}
+
 .LR_form{
     background-color: #fff;
     display: flex;
@@ -166,19 +136,11 @@ img.listing-image {
     background-color: #eee;
     border-radius: 10px;
     border: none;
+    margin-top: 20px;
     width: 100%;
     padding: 12px 15px;
 }
-.LR_container{
-    background-color: #FFF;
-    border-radius: 25px;
-    box-shadow: 0 14px 28px rgba(0, 0 , 0, 0.25), 0 10px 10px rgba(0, 0 , 0, 0.22);
-    position: relative;
-    overflow: hidden;
-    width: 768px;
-    max-width: 100%;
-    min-height: 500px;
-}
+
 .form-container{
     position: absolute;
     top: 0;
@@ -190,7 +152,7 @@ img.listing-image {
     width: 50%;
     z-index: 2;
 }
-.LR_container.right-panel-active .login-container{
+.LR_containe .right-panel-active .login-container{
     transform: translateX(100%);
 }
 .register-container{

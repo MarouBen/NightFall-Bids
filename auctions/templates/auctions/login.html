@@ -17,46 +17,36 @@
         <input class="btn btn-primary" type="submit" value="Login">
     </form>
     Don't have an account? <a href="{% url 'register' %}">Register here.</a> {% endcomment %}
-   <main class="LR_main">
-     <div class="LR_container" id="LR_container">
-       <div class="form-container register-container">
-         <form action="#">
-           <h1>Register here.</h1>
-           <input type="text" placeholder="Name">
-           <input type="email" placeholder="Email">
-           <input type="password" placeholder="Password">
-           <button>Register</button>
-         </form>
-       </div>
+    <main class="my-5 LR_main">
+        <div class="LR_container container mt-5 d-flex justify-content-center" id="LR_container">
+            <div class="form-container register-container">
+            <form class="LR_form" action="#">
+                <h1>Register here.</h1>
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <input type="password" name="confirmation" placeholder="Confirm Password">
+                <button class="btn mt-3">Register</button>
+            </form>
+        </div>
 
        <div class="form-container login-container">
          <form class="LR_form" action="#">
            <h1>Login here.</h1>
            <input type="email" placeholder="Email">
            <input type="password" placeholder="Password">
-           <div class="content">
-             <div class="checkbox">
-               <input type="checkbox" name="checkbox" id="checkbox">
-               <label>Remember me</label>
-             </div>
-             <div class="pass-link">
-               <a href="#">Forgot password?</a>
-             </div>
-           </div>
-           <button>Login</button>
+           <button class="btn mt-3">Login</button>
        </div>
    
        <div class="overlay-container">
          <div class="overlay">
            <div class="overlay-panel overlay-left">
-             <h1 class="title">Hello <br>night bidders</h1>
+             <h1 class="title">Hello <br>Night Bidders</h1>
              <p>if Yout have an account, login here and have fun</p>
-             <button class="ghost" id="login">Login
-               <i class="lni lni-arrow-left login"></i>
-             </button>
+             <button class="ghost" id="login">Login</button>
            </div>
            <div class="overlay-panel overlay-right">
-             <h1 class="title">Start your <br> journey now</h1>
+             <h1 class="title">Start your <br>biding journey</h1>
              <p>if you don't have an account yet, join us and start your biding journey.</p>
              <button class="ghost" id="register">Register
                <i class="lni lni-arrow-right register"></i>
