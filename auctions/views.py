@@ -239,6 +239,11 @@ def search(request):
     if request.method == "GET":
         query = request.GET.get("S")
         category = request.GET.get("category")
+        state = request.GET.get("state")
+        if state == "True":
+            state = True
+        elif state =="False":
+            state = False
         try:
             if category:
                 listing = Listing.objects.filter(name=query,category=category).first()
@@ -257,9 +262,13 @@ def search(request):
             if category:
                 if query.upper().strip() in listing.name.upper() and category in listing.category:
                     searched_listings.append(listing)
+            elif state != None: 
+                if query.upper().strip() in listing.name.upper() and listing.open == state:
+                    searched_listings.append(listing)
             else:
                 if query.upper().strip() in listing.name.upper():
                     searched_listings.append(listing)
+                    
         
         if searched_listings.__len__() > 0:
             if category:
@@ -267,6 +276,12 @@ def search(request):
                     "listings":searched_listings,
                     "Listing":Listing,
                     "category":category
+                }
+            elif state != None:
+                context = {
+                    "listings":searched_listings,
+                    "Listing":Listing,
+                    "open":state
                 }
             else:
                 context = {
@@ -290,6 +305,10 @@ def categories(request, category):
 
 def state(request, state):
     listings = Listing.objects.filter(open=state).all()
+    if state == "True":
+        state = True
+    if state == "False":
+        state = False
     context = {
                 "listings":listings,
                 "Listing":Listing,
