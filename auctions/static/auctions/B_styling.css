@@ -334,14 +334,14 @@
     background: var(--bg);
     transition: 0.2s;
   }
-  .LR-btn:hover {
+.LR-btn:hover {
     color: var(--hover-text);
     transform: translate(-0.25rem,-0.25rem);
     background: var(--hover-bg);
     box-shadow: 0.25rem 0.25rem var(--bg);
   }
   
-  .LR-btn:active {
+.LR-btn:active {
     transform: translate(0);
     box-shadow: none;
   }
@@ -349,7 +349,7 @@
 
 
 
-  .main_btns {
+.main_btns {
     appearance: none;
     background-color: transparent;
     border: 1px solid #FFF;
@@ -376,11 +376,11 @@
     will-change: transform;
    }
    
-   .main_btns:disabled {
+.main_btns:disabled {
     pointer-events: none;
    }
    
-   .main_btns:hover {
+.main_btns:hover {
     color: #fff;
     background-color: #1b1d1f;
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
@@ -388,7 +388,7 @@
     border: none;
    }
    
-   .main_btns:active {
+.main_btns:active {
     box-shadow: none;
     transform: translateY(0);
    }
