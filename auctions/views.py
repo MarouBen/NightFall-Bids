@@ -230,7 +230,7 @@ def add_comment(request):
  
 def view_search(request,context = None):
      if context == None:
-         return render(request,"auctions/not_found.html")
+         return render(request,"auctions/404.html")
      else :
          return render(request,"auctions/search.html",context)
  
