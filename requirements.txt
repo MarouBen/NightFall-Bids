@@ -6,3 +6,6 @@ setuptools-git==1.2
 yarg==0.1.9
 urllib3==1.26.13
 oauthlib==3.2.2
+psycopg2-binary==2.9.5
+sqlparse==0.4.3
+asgiref==3.5.2

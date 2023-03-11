@@ -1,6 +1,9 @@
 # Ignore all the images added during devlopment
 auctions/Images/Listings/*
 
+# Deployment folders
+Commerce.zip
+.ebextensions
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
