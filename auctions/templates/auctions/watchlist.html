@@ -27,23 +27,13 @@
                                 <p class="card-text"><b>Curent highest bid:</b> ${{ listing.bids.first.bid }}</p>
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex">
-                                        {% if listing in user.watchlist %}
-                                            <form action="{% url 'watchlist' %}" method="post">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="action" value="add">
-                                                <input id="heart" name="watch" value="{{ listing.pk }}" type="checkbox" onchange="this.form.submit()" hidden/>
-                                                <label class="i1" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                                <label class="i2" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                            </form>
-                                        {% else %}
-                                            <form action="{% url 'watchlist' %}" method="post">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="action" value="remove">
-                                                <input id="heart" name="watch" value="{{ listing.pk }}" type="checkbox" onchange="this.form.submit()" hidden/>
-                                                <label class="i2" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                                <label class="i1" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
-                                            </form>
-                                        {% endif %} 
+                                        <form action="{% url 'watchlist' %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="remove">
+                                            <input id="heart" name="watch" value="{{ listing.pk }}" type="checkbox" onclick="this.form.submit()" hidden/>
+                                            <label class="i2" for="heart"><i class="far fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
+                                            <label class="i1" for="heart"><i class="fas fa-heart fa-2x ms-3" alt="Add to whatchlist"></i></label>
+                                        </form>
                                     </div>
                                     <div>
                                         <a href="{% url 'view' listing.pk %}" class="d-flex justify-content-end mt-2">

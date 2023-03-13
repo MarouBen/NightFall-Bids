@@ -243,6 +243,7 @@ def search(request):
             state = True
         elif state =="False":
             state = False
+            
         try:
             if category:
                 listing = Listing.objects.filter(name=query,category=category).first()
@@ -253,21 +254,20 @@ def search(request):
                 return redirect("view",pk=pk)
         except Listing.DoesNotExist:
             pass
-        
         searched_listings = []
         listings = Listing.objects.all()
-        
         for listing in listings:
-            if category:
+            if len(category) != 0:
                 if query.upper().strip() in listing.name.upper() and category in listing.category:
                     searched_listings.append(listing)
-            elif state != None: 
+                    print("yes")
+            elif isinstance(state, bool): 
                 if query.upper().strip() in listing.name.upper() and listing.open == state:
                     searched_listings.append(listing)
             else:
                 if query.upper().strip() in listing.name.upper():
                     searched_listings.append(listing)
-                    
+          
         
         if searched_listings.__len__() > 0:
             if category:
