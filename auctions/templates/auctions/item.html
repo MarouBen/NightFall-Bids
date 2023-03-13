@@ -1,5 +1,16 @@
 {% extends "auctions/layout.html"%}
 {% block body %}
+   <script>
+        window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted || 
+                                   ( typeof window.performance != "undefined" && 
+                                        window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+              // Handle page restore.
+              window.location.reload();
+            }
+          });
+   </script>
     <main class="m-5 pt-3">
         <div class=" container-fluid mt-5 pt-5">
             <div class="row shadow-4 w-100" style="background-color:#ffffff;">
@@ -176,5 +187,7 @@
             form.submit();
             }
         });
+        
+        
     </script>
 {% endblock %}
