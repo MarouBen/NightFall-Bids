@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
+from django.core.files.storage import default_storage as storage
 
 # Validator for my image table
 def validate_image_extension(value):
@@ -48,7 +49,7 @@ class ListingImage(models.Model):
     """The table table that will hold the images of a listing"""
     
     listing = models.ForeignKey(Listing,on_delete=models.CASCADE,related_name="theImages")
-    images = models.ImageField(upload_to="auctions/Images/Listings/", validators=[validate_image_extension])
+    images = models.ImageField(upload_to="media_night/auctions/Images/Listings/", storage=storage, validators=[validate_image_extension])
     
     
 class Bid(models.Model):
