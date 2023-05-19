@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  django:
+    image: django-docker:latest
+    build: .
+    ports:
+      - "8000:8000"
