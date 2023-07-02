@@ -2,7 +2,7 @@ version: '3'
 
 services:
   django:
-    image: django-docker:latest
+    image: nightfall:latest
     build: .
     ports:
       - "8000:8000"
