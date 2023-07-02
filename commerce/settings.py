@@ -17,7 +17,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+LOGIN_URL = '/login'
 
 # Application definition
 
@@ -131,4 +131,7 @@ AZURE_DEFAULT_ACL = None
 
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{AZURE_CONTAINER}/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_night')
+
+# Heroku
+django_heroku.settings(locals())
 
